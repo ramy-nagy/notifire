@@ -72,17 +72,27 @@ If you need to use a different location for your credentials file, you can modif
 php artisan migrate
 ```
 
-5. Add the `fcm_token` field to your User model's `$fillable` array:
+5. Add the `fcm_token` field to your model's `$fillable` array:
 
 ```php
-// In App\Models\User.php
 protected $fillable = [
     // existing fields...
     'fcm_token',
 ];
 ```
 
-This is required for the package to store FCM tokens in your user model.
+This is required for the package to store FCM tokens.
+
+### Custom Model Configuration
+
+By default, the package uses the `User` model and `users` table. To use a different model, update your `config/fcm.php`:
+
+```php
+'model' => App\Models\Customer::class,
+'table' => 'customers',
+```
+
+> **Note:** Make sure to set the `table` config **before** running migrations, as the migration uses this value to determine which table to add the `fcm_token` column to.
 
 ## Usage
 

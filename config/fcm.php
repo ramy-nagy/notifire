@@ -27,6 +27,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Model Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configure which model and table the package should use for storing
+    | FCM tokens. By default, it uses the User model and users table.
+    |
+    */
+    'model' => App\Models\User::class,
+    'table' => 'users',
+
+    /*
+    |--------------------------------------------------------------------------
     | FCM API URL
     |--------------------------------------------------------------------------
     |

@@ -8,14 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('fcm_token')->nullable()->after('remember_token');
+        $table = config('fcm.table', 'users');
+
+        Schema::table($table, function (Blueprint $table) {
+            $table->string('fcm_token')->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        $table = config('fcm.table', 'users');
+
+        Schema::table($table, function (Blueprint $table) {
             $table->dropColumn('fcm_token');
         });
     }
