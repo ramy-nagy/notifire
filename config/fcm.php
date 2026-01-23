@@ -72,4 +72,16 @@ return [
     |
     */
     'logging_enabled' => env('FCM_LOGGING_ENABLED', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Throw Exceptions
+    |--------------------------------------------------------------------------
+    |
+    | When enabled, the package will throw exceptions instead of silently
+    | returning false on failures. This is useful for debugging issues
+    | like cURL errors, authentication failures, or invalid tokens.
+    |
+    */
+    'throw_exceptions' => env('FCM_THROW_EXCEPTIONS', false),
 ];

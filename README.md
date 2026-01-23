@@ -442,6 +442,26 @@ All notification attempts are automatically logged. You can find the logs in you
 - Failed notifications: `error` level with error details
 - Missing FCM tokens: `warning` level
 
+You can disable logging by setting the `FCM_LOGGING_ENABLED` environment variable:
+
+```env
+FCM_LOGGING_ENABLED=false
+```
+
+## Debugging
+
+By default, the package silently returns `false` when a notification fails to send. To help debug issues like cURL errors, authentication failures, or invalid tokens, you can enable exception throwing:
+
+```env
+FCM_THROW_EXCEPTIONS=true
+```
+
+When enabled, the package will:
+1. Log the error (if logging is enabled)
+2. Throw the original exception instead of returning `false`
+
+This is useful for debugging production issues or during development when you want to see the exact error that occurred.
+
 ## Testing
 
 To run the tests, you need to have a valid Firebase configuration:

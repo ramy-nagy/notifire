@@ -373,10 +373,15 @@ class FcmService implements FcmServiceInterface
                         'token' => $singleToken,
                         'error' => $e->getMessage()
                     ]);
+
+                    if (config('fcm.throw_exceptions')) {
+                        throw $e;
+                    }
+
                     $success = false;
                 }
             }
-            
+
             return $success;
         } catch (FcmRequestException $e) {
             $this->log('error', 'FCM notification failed', [
@@ -384,12 +389,22 @@ class FcmService implements FcmServiceInterface
                 'response_data' => $e->getResponseData(),
                 'trace' => $e->getTraceAsString()
             ]);
+
+            if (config('fcm.throw_exceptions')) {
+                throw $e;
+            }
+
             return false;
         } catch (Exception $e) {
             $this->log('error', 'FCM notification failed', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
+
+            if (config('fcm.throw_exceptions')) {
+                throw $e;
+            }
+
             return false;
         }
     }
@@ -619,6 +634,11 @@ class FcmService implements FcmServiceInterface
                     'topics' => is_string($topics) ? $topics : implode(', ', $topics),
                     'error' => $e->getMessage()
                 ]);
+
+                if (config('fcm.throw_exceptions')) {
+                    throw $e;
+                }
+
                 return false;
             }
         } catch (FcmRequestException $e) {
@@ -627,12 +647,22 @@ class FcmService implements FcmServiceInterface
                 'response_data' => $e->getResponseData(),
                 'trace' => $e->getTraceAsString()
             ]);
+
+            if (config('fcm.throw_exceptions')) {
+                throw $e;
+            }
+
             return false;
         } catch (Exception $e) {
             $this->log('error', 'FCM notification to topics failed', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
+
+            if (config('fcm.throw_exceptions')) {
+                throw $e;
+            }
+
             return false;
         }
     }
